@@ -18,7 +18,7 @@
       "protocol": "HTTP",
       "portIndex": 0,
       "path": "/",
-      "gracePeriodSeconds": 120,
+      "gracePeriodSeconds": 300,
       "intervalSeconds": 20,
       "maxConsecutiveFailures": 3
     }
