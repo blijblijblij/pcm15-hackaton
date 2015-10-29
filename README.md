@@ -15,6 +15,8 @@ Nice!
 
 from http://weave.works/guides/weave-and-docker-platform/weavenetwork.html
 
+![Alt text](img/virtual-network.png)
+
 # Mesos
 ![Alt text](img/mesos.png)
 
