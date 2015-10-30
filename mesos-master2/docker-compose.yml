@@ -1,0 +1,63 @@
+zookeeper:
+  container_name: zookeeper
+  image: mesoscloud/zookeeper:3.4.6-ubuntu-14.04
+  restart: always
+  net: host
+  environment:
+     - SECRET
+     - MYID
+     - SERVERS
+
+mesos-master:
+  container_name: mesos-master
+  image: mesoscloud/mesos-master:0.23.0-ubuntu-14.04
+  restart: always
+  net: host
+  environment:
+     - SECRET
+     - MESOS_CLUSTER
+     - MESOS_HOSTNAME
+     - MESOS_IP
+     - MESOS_QUORUM
+     - MESOS_ZK
+
+mesos-slave:
+  container_name: slave
+  image: mesoscloud/mesos-slave:0.23.0-ubuntu-14.04
+  restart: always
+  net: host
+  privileged: true
+  environment:
+     - SECRET
+     - MESOS_HOSTNAME
+     - MESOS_IP
+     - MESOS_MASTER
+     - MESOS_LOG_DIR
+     - MESOS_LOGGING_LEVEL
+  volumes:
+     - "/sys/fs/cgroup:/sys/fs/cgroup"
+     - "/var/run/docker.sock:/var/run/docker.sock"
+
+marathon:
+  container_name: marathon
+  image: mesoscloud/marathon:0.11.0-ubuntu-15.04
+  restart: always
+  net: host
+  environment:
+     - SECRET
+     - MESOS_HOSTNAME
+     - MARATHON_HTTPS_ADDRESS
+     - MARATHON_HTTP_ADDRESS
+     - MARATHON_MASTER
+     - MARATHON_ZK
+
+chronos:
+  container_name: chronos
+  image: mesoscloud/chronos:2.4.0-ubuntu-14.04
+  restart: always
+  net: host
+  environment:
+     - SECRET
+     - CHRONOS_HTTP_PORT
+     - CHRONOS_MASTER
+     - CHRONOS_ZK_HOSTS
